@@ -1,7 +1,7 @@
 package main
 
 import (
-	"crud-echo/types"
+	"crud-echo/handlers"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"gorm.io/driver/postgres"
@@ -19,12 +19,13 @@ func main() {
 	fmt.Println(db)
 
 	// Initialize the Handler with the database connection
-	h := &types.Handler{DB: db}
+	h := &handlers.Handler{DB: db}
 
 	e := echo.New()
 
 	// Register routes and pass the handler
 	e.GET("/", h.HomeHandler())
+	e.GET("/info", h.HomeHandler())
 
 	e.Logger.Fatal(e.Start(":4000"))
 }

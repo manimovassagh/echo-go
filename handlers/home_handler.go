@@ -1,6 +1,7 @@
-package types
+package handlers
 
 import (
+	"crud-echo/types"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 	"net/http"
@@ -12,12 +13,13 @@ type Handler struct {
 }
 
 // HomeHandler returns a handler function with access to the Handler struct
-func (h *Handler) HomeHandler() echo.HandlerFunc {
+func (db *Handler) HomeHandler() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		response := SampleResponse{
+		response := types.SampleResponse{
 			Message: "This is a sample response for home handler yes baby",
 			Status:  http.StatusOK,
 		}
+
 		// Use h.DB to interact with the database
 		// Example: result := h.DB.Find(...)
 		return c.JSON(http.StatusOK, response)
